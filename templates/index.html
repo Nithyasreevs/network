@@ -517,26 +517,37 @@ function startCapture() {
     })
     .then(data => {
       console.log('Live capture started:', data);
+      
+      // Start polling for live data
+      if (!liveInterval) {
+        liveInterval = setInterval(async () => {
+          try {
+            const res = await fetch('/live');
+            const data = await res.json();
+
+            if (data.error) {
+              alert('❌ ' + data.error);
+              stopCapture();
+              return;
+            }
+
+            if (!data.length) return;
+
+            const latest = data[data.length - 1];
+
+            showResult(latest, false, null);
+            addFeedItem(latest);
+            updateStats(latest);
+            updateChart();
+          } catch (error) {
+            console.error('Live data fetch error:', error);
+          }
+        }, 2000);
+      }
     })
     .catch(error => {
       alert('❌ Live capture failed: ' + error.message + '\n\nMake sure the server has admin privileges for packet capture.');
     });
-
-  if (!liveInterval) {
-    liveInterval = setInterval(async () => {
-      const res = await fetch('/live');
-      const data = await res.json();
-
-      if (!data.length) return;
-
-      const latest = data[data.length - 1];
-
-      showResult(latest, false, null);
-      addFeedItem(latest);
-      updateStats(latest);
-      updateChart();
-    }, 2000);
-  }
 }
 
 function stopCapture() {

@@ -317,9 +317,10 @@ def sniffer_thread():
 
 @app.route("/start")
 def start_capture():
-    global is_capturing, flows, live_data_queue
+    global is_capturing, flows, live_data_queue, capture_error
     if not is_capturing:
         is_capturing = True
+        capture_error = None  # Clear previous errors
         flows.clear()
         live_data_queue.clear()
         thread = threading.Thread(target=sniffer_thread)
@@ -335,6 +336,9 @@ def stop_capture():
 
 @app.route("/live")
 def get_live_data():
+    global capture_error
+    if capture_error:
+        return jsonify({"error": f"Live capture failed: {capture_error}. Make sure the server has admin privileges."}), 500
     return jsonify(live_data_queue)
 
 if __name__ == "__main__":
