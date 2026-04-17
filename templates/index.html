@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NetGuard — Network Threat Detector</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg:       #f0f9ff;
+    --surface:  #ffffff;
+    --border:   #bae6fd;
+    --accent:   #0ea5e9;
+    --green:    #10b981;
+    --red:      #ef4444;
+    --yellow:   #f59e0b;
+    --text:     #0c4a6e;
+    --muted:    #64748b;
+    --radius:   12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── TOP BAR ── */
+  header { padding: 16px 28px; border-bottom: 1px solid var(--border); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .header-content { display: flex; align-items: center; justify-content: space-between; }
+  header h1 { font-size: 1.4rem; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .header-actions { display: flex; align-items: center; gap: 15px; }
+  .badge { font-size: .75rem; padding: 5px 12px; border-radius: 20px; font-weight: 600; display: inline-flex; align-items: center; }
+  .badge-green { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+  .badge-red   { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .badge-warn  { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+  /* ── LAYOUT ── */
+  main { display: grid; grid-template-columns: 420px 1fr; gap: 24px; padding: 24px 28px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.02); transition: all 0.2s ease; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04); }
+  .card h2 { font-size: .85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+
+  /* ── FORM ── */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group.full { grid-column: span 2; }
+  label { font-size: .75rem; color: var(--muted); }
+  input, select {
+    background: #f1f5f9; border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); padding: 7px 10px; font-size: .85rem; width: 100%;
+    transition: all .2s;
+  }
+  input:focus, select:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+  select option { background: #fff; }
+
+  /* section label inside form */
+  .section-divider {
+    grid-column: span 2; font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--accent); margin-top: 6px; padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── BUTTONS ── */
+  .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  button { cursor: pointer; border: none; border-radius: 6px; padding: 9px 18px; font-size: .85rem; font-weight: 600; transition: opacity .15s; }
+  button:hover { opacity: .85; }
+  .btn-primary  { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: #fff; flex: 1; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4); }
+  .btn-normal   { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+  .btn-attack   { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+  /* ── RESULT BOX ── */
+  #result-box {
+    margin-top: 14px; padding: 14px 16px; border-radius: var(--radius);
+    display: none; border: 1px solid var(--border);
+  }
+  #result-box.normal { background: #f0fdf4; border-color: var(--green); }
+  #result-box.attack { background: #fef2f2; border-color: var(--red); }
+  #result-box.warn   { background: #fffbeb; border-color: var(--yellow); }
+  #result-label { font-size: 1.4rem; font-weight: 700; }
+  #result-meta  { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+  .conf-bar-wrap { margin-top: 10px; background: var(--bg); border-radius: 6px; height: 8px; overflow: hidden; }
+  .conf-bar      { height: 100%; border-radius: 6px; transition: width .4s ease; }
+
+  /* ── RIGHT COLUMN ── */
+  .right-col { display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── STAT CARDS ── */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+  .stat-num { font-size: 1.8rem; font-weight: 700; }
+  .stat-lbl { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+  .stat-normal { color: var(--green); }
+  .stat-attack { color: var(--red); }
+  .stat-total  { color: var(--accent); }
+
+  /* ── LIVE FEED ── */
+  #feed { max-height: 230px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+  .feed-item { display: flex; align-items: center; gap: 10px; font-size: .82rem;
+               padding: 7px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); }
+  .feed-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-green  { background: var(--green); }
+  .dot-red    { background: var(--red); }
+  .dot-yellow { background: var(--yellow); }
+  .feed-label { font-weight: 600; min-width: 110px; }
+  .feed-conf  { color: var(--muted); margin-left: auto; }
+
+  /* ── BAR CHART ── */
+  #chart-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .chart-row { display: flex; align-items: center; gap: 8px; font-size: .8rem; }
+  .chart-key { width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+  .chart-bar-bg { flex: 1; background: var(--bg); border-radius: 4px; height: 18px; overflow: hidden; }
+  .chart-bar-fill { height: 100%; border-radius: 4px; transition: width .4s ease; min-width: 2px; }
+  .chart-val { width: 28px; text-align: right; color: var(--muted); }
+
+  /* ── EXPORT BTN ── */
+  .model-warning {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
+    padding: 12px 16px; font-size: .83rem; color: #92400e; line-height: 1.5;
+    display: none;
+  }
+  .model-warning.show { display: block; }
+  .model-warning code { background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 4px; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-content">
+    <h1>🛡 NetGuard — Network Threat Detector</h1>
+    <div class="header-actions">
+      <button class="btn-primary" onclick="startCapture()" style="max-width: 150px;">📡 Live Capture</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── WARNING if scaler/pca missing ── -->
+<div id="missing-warning" class="model-warning" style="margin:20px 28px 0;">
+  ⚠️ <strong>Configuration Alert:</strong>
+  The model requires preprocessing steps (Scaler/PCA) that were not detected. 
+  Please ensure your <code>model.pkl</code> includes the full pipeline components.
+  <br><br>
+  <em>Demo mode remains available for testing.</em>
+</div>
+
+<main>
+<!-- ═══════════════════ LEFT — INPUT FORM ═══════════════════ -->
+<div>
+  <div class="card">
+    <h2>📦 Packet Features</h2>
+
+    <!-- quick-fill buttons -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+      <button class="btn-normal" onclick="fillNormal()">🟢 Normal Traffic</button>
+      <button class="btn-attack" onclick="fillAttack()">🔴 DDoS Attack</button>
+      <button onclick="startCapture()">▶ Start Live</button>
+<button onclick="stopCapture()">⛔ Stop Live</button>
+    </div>
+
+    <div class="form-grid">
+
+      <!-- ── NUMERIC FEATURES ── -->
+      <div class="section-divider">Numeric Features (14)</div>
+
+      <div class="form-group">
+        <label>Source Port</label>
+        <input type="number" id="srcPort" value="443" min="0" max="65535"/>
+      </div>
+      <div class="form-group">
+        <label>Destination Port</label>
+        <input type="number" id="dstPort" value="80" min="0" max="65535"/>
+      </div>
+      <div class="form-group">
+        <label>Packet Size (bytes)</label>
+        <input type="number" id="pktSize" value="512" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Payload Length (bytes)</label>
+        <input type="number" id="payloadLen" value="480" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Flow Duration (ms)</label>
+        <input type="number" id="flowDur" value="3000" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Bytes in Flow</label>
+        <input type="number" id="bytesFlow" value="15000" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Packets in Flow</label>
+        <input type="number" id="pktsFlow" value="30" min="1"/>
+      </div>
+      <div class="form-group">
+        <label>Inter-Arrival Time (ms)</label>
+        <input type="number" id="interArrival" value="10" min="0" step="0.1"/>
+      </div>
+      <div class="form-group">
+        <label>Rate of Packets (pps)</label>
+        <input type="number" id="pktRate" value="50" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Unique Source Count</label>
+        <input type="number" id="uniqueSrc" value="1" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Unique Destination Count</label>
+        <input type="number" id="uniqueDst" value="1" min="0"/>
+      </div>
+      <div class="form-group">
+        <label>Anomaly Score (0–1)</label>
+        <input type="number" id="anomScore" value="0.1" min="0" max="1" step="0.01"/>
+      </div>
+      <div class="form-group">
+        <label>Attack Duration (s)</label>
+        <input type="number" id="attackDur" value="0" min="0" step="0.1"/>
+      </div>
+      <!-- avg packet size is derived, shown as read-only info -->
+      <div class="form-group">
+        <label>Avg Packet Size <span style="color:var(--accent)">(auto)</span></label>
+        <input type="text" id="avgPktDisp" value="500.00" readonly style="opacity:.6;cursor:default"/>
+      </div>
+
+      <!-- ── CATEGORICAL FEATURES ── -->
+      <div class="section-divider">Categorical Features (encoded by app)</div>
+
+      <div class="form-group">
+        <label>Protocol</label>
+        <select id="protocol">
+          <option value="TCP"  selected>TCP</option>
+          <option value="UDP">UDP</option>
+          <option value="ICMP">ICMP</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Device Type</label>
+        <select id="deviceType">
+          <option value="Smart Speaker" selected>Smart Speaker (baseline)</option>
+          <option value="Camera">Camera</option>
+          <option value="Router">Router</option>
+          <option value="Sensor">Sensor</option>
+          <option value="Smart TV">Smart TV</option>
+          <option value="Thermostat">Thermostat</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Operating System</label>
+        <select id="operatingSystem">
+          <option value="Android" selected>Android (baseline)</option>
+          <option value="Linux">Linux</option>
+          <option value="Windows">Windows</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Firmware Version (encoded)</label>
+        <input type="number" id="firmwareEncoded" value="0" min="0" step="1"
+               title="Integer label-encoded value of Firmware Version (0 = first label)"/>
+      </div>
+
+    </div><!-- /form-grid -->
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="analyze()">🔍 Analyze Packet</button>
+    </div>
+
+    <!-- RESULT BOX -->
+    <div id="result-box">
+      <div id="result-label">—</div>
+      <div id="result-meta">—</div>
+      <div class="conf-bar-wrap"><div class="conf-bar" id="conf-bar"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ RIGHT — STATS ═══════════════════ -->
+<div class="right-col">
+
+  <!-- stat cards -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num stat-total" id="stat-total">0</div>
+      <div class="stat-lbl">Total Analyzed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num stat-normal" id="stat-normal">0</div>
+      <div class="stat-lbl">Normal</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num stat-attack" id="stat-attack">0</div>
+      <div class="stat-lbl">Attacks</div>
+    </div>
+  </div>
+
+  <!-- detection breakdown chart -->
+  <div class="card">
+    <h2>📊 Detection Breakdown</h2>
+    <div style="height: 250px;">
+      <canvas id="detectionChart"></canvas>
+    </div>
+  </div>
+
+  <!-- live feed -->
+  <div class="card">
+    <h2>📡 Live Packet Feed</h2>
+    <div id="feed"><p style="color:var(--muted);font-size:.8rem;">Waiting for packets…</p></div>
+  </div>
+
+</div>
+</main>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────
+const counts   = {};   // { label: count }
+let totalCount = 0;
+
+// ─── AUTO-UPDATE AVG PACKET SIZE ─────────────────────────
+function updateAvg() {
+  const pkts  = Math.max(parseFloat(document.getElementById('pktsFlow').value)  || 1, 1);
+  const bytes = parseFloat(document.getElementById('bytesFlow').value) || 0;
+  document.getElementById('avgPktDisp').value = (bytes / pkts).toFixed(2);
+}
+document.getElementById('pktsFlow').addEventListener('input',  updateAvg);
+document.getElementById('bytesFlow').addEventListener('input', updateAvg);
+
+// ─── READ FORM ────────────────────────────────────────────
+function readForm() {
+  return {
+    srcPort:         parseFloat(document.getElementById('srcPort').value)         || 443,
+    dstPort:         parseFloat(document.getElementById('dstPort').value)         || 80,
+    pktSize:         parseFloat(document.getElementById('pktSize').value)         || 512,
+    payloadLen:      parseFloat(document.getElementById('payloadLen').value)      || 480,
+    flowDur:         parseFloat(document.getElementById('flowDur').value)         || 3000,
+    bytesFlow:       parseFloat(document.getElementById('bytesFlow').value)       || 15000,
+    pktsFlow:        parseFloat(document.getElementById('pktsFlow').value)        || 30,
+    interArrival:    parseFloat(document.getElementById('interArrival').value)    || 10,
+    pktRate:         parseFloat(document.getElementById('pktRate').value)         || 50,
+    uniqueSrc:       parseFloat(document.getElementById('uniqueSrc').value)       || 1,
+    uniqueDst:       parseFloat(document.getElementById('uniqueDst').value)       || 1,
+    anomScore:       parseFloat(document.getElementById('anomScore').value)       || 0.1,
+    attackDur:       parseFloat(document.getElementById('attackDur').value)       || 0,
+    protocol:        document.getElementById('protocol').value,
+    deviceType:      document.getElementById('deviceType').value,
+    operatingSystem: document.getElementById('operatingSystem').value,
+    firmwareEncoded: parseFloat(document.getElementById('firmwareEncoded').value) || 0,
+  };
+}
+
+// ─── ANALYZE ─────────────────────────────────────────────
+async function analyze() {
+  const data = readForm();
+
+  let res, json;
+  try {
+    res  = await fetch('/predict', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    json = await res.json();
+  } catch(e) {
+    alert('Connection error: ' + e.message);
+    return;
+  }
+
+  if (json.status === 'error') {
+    // Show the missing pkl warning
+    document.getElementById('missing-warning').classList.add('show');
+    showResult({ label:'Error', confidence:0, is_attack:false, model:'—' }, true, json.message);
+    return;
+  }
+
+  document.getElementById('missing-warning').classList.remove('show');
+  showResult(json, false, null);
+  addFeedItem(json);
+  updateStats(json);
+  updateChart();
+}
+
+// ─── SHOW RESULT BOX ─────────────────────────────────────
+function showResult(json, isErr, errMsg) {
+  const box  = document.getElementById('result-box');
+  const lbl  = document.getElementById('result-label');
+  const meta = document.getElementById('result-meta');
+  const bar  = document.getElementById('conf-bar');
+
+  box.style.display = 'block';
+  box.className = '';
+
+  if (isErr) {
+    box.classList.add('warn');
+    lbl.textContent  = '⚠ ' + (errMsg || 'Error');
+    lbl.style.color  = 'var(--yellow)';
+    meta.textContent = 'Fix the model.pkl export (see warning above)';
+    bar.style.width  = '0%';
+    bar.style.background = 'var(--yellow)';
+    return;
+  }
+
+  const isAttack = json.is_attack;
+  box.classList.add(isAttack ? 'attack' : 'normal');
+  lbl.textContent = (isAttack ? '🚨 ' : '✅ ') + json.label;
+  lbl.style.color = isAttack ? 'var(--red)' : 'var(--green)';
+  meta.textContent = `Confidence: ${json.confidence}%  |  Model: ${json.model}`;
+  bar.style.width      = json.confidence + '%';
+  bar.style.background = isAttack ? 'var(--red)' : 'var(--green)';
+}
+
+// ─── FEED ─────────────────────────────────────────────────
+function addFeedItem(json) {
+  const feed = document.getElementById('feed');
+  // remove placeholder
+  const ph = feed.querySelector('p');
+  if (ph) ph.remove();
+
+  const dot  = json.is_attack ? 'dot-red' : 'dot-green';
+  const time = new Date().toLocaleTimeString();
+  const div  = document.createElement('div');
+  div.className = 'feed-item';
+  div.innerHTML = `
+    <div class="feed-dot ${dot}"></div>
+    <div class="feed-label">${json.label}</div>
+    <div style="font-size:.75rem;color:var(--muted)">${time}</div>
+    <div class="feed-conf">${json.confidence}%</div>`;
+  feed.insertBefore(div, feed.firstChild);
+  // keep max 30 items
+  while (feed.children.length > 30) feed.removeChild(feed.lastChild);
+}
+
+// ─── STATS ────────────────────────────────────────────────
+function updateStats(json) {
+  totalCount++;
+  counts[json.label] = (counts[json.label] || 0) + 1;
+
+  document.getElementById('stat-total').textContent  = totalCount;
+
+  const normalCount = counts['Normal'] || 0;
+  document.getElementById('stat-normal').textContent = normalCount;
+  document.getElementById('stat-attack').textContent = totalCount - normalCount;
+}
+
+// ─── CHART (CHART.JS) ────────────────────────────────────
+let detectionChart = null;
+
+function updateChart() {
+    const ctx = document.getElementById('detectionChart').getContext('2d');
+    const labels = Object.keys(counts);
+    const data = Object.values(counts);
+
+    if (detectionChart) {
+        detectionChart.data.labels = labels;
+        detectionChart.data.datasets[0].data = data;
+        detectionChart.update();
+    } else {
+        detectionChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Packets',
+                    data: data,
+                    backgroundColor: labels.map(l => l === 'Normal' ? '#10b981' : '#ef4444'),
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#e2e8f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+}
+
+// ─── QUICK FILL — NORMAL ─────────────────────────────────
+function fillNormal() {
+  set('srcPort', 49200);   set('dstPort', 443);
+  set('pktSize', 520);     set('payloadLen', 480);
+  set('flowDur', 2800);    set('bytesFlow', 16000);
+  set('pktsFlow', 30);     set('interArrival', 12);
+  set('pktRate', 42);      set('uniqueSrc', 1);
+  set('uniqueDst', 1);     set('anomScore', 0.05);
+  set('attackDur', 0);     set('firmwareEncoded', 0);
+  selVal('protocol', 'TCP');
+  selVal('deviceType', 'Smart Speaker');
+  selVal('operatingSystem', 'Android');
+  updateAvg();
+  analyze();
+}
+
+// ─── QUICK FILL — DDOS ATTACK ─────────────────────────────
+function fillAttack() {
+  set('srcPort', 1024);    set('dstPort', 80);
+  set('pktSize', 64);      set('payloadLen', 28);
+  set('flowDur', 60000);   set('bytesFlow', 4200000);
+  set('pktsFlow', 65000);  set('interArrival', 0.9);
+  set('pktRate', 1100);    set('uniqueSrc', 850);
+  set('uniqueDst', 1);     set('anomScore', 0.92);
+  set('attackDur', 58);    set('firmwareEncoded', 0);
+  selVal('protocol', 'UDP');
+  selVal('deviceType', 'Router');
+  selVal('operatingSystem', 'Linux');
+  updateAvg();
+  analyze();
+}
+
+function set(id, val)    { document.getElementById(id).value = val; }
+function selVal(id, val) { document.getElementById(id).value = val; }
+
+let liveInterval = null;
+
+function startCapture() {
+  fetch('/start');
+
+  if (!liveInterval) {
+    liveInterval = setInterval(async () => {
+      const res = await fetch('/live');
+      const data = await res.json();
+
+      if (!data.length) return;
+
+      const latest = data[data.length - 1];
+
+      showResult(latest, false, null);
+      addFeedItem(latest);
+      updateStats(latest);
+      updateChart();
+    }, 2000);
+  }
+}
+
+function stopCapture() {
+  fetch('/stop');
+
+  clearInterval(liveInterval);
+  liveInterval = null;
+}
+</script>
+</body>
+</html>

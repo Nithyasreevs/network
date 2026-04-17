@@ -1,0 +1,5 @@
+flask==3.0.3
+numpy>=2.0
+scikit-learn>=1.5
+scapy
+gunicorn
