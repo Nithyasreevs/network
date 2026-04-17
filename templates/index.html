@@ -301,7 +301,7 @@
   <!-- live feed -->
   <div class="card">
     <h2>📡 Live Packet Feed</h2>
-    <div id="feed"><p style="color:var(--muted);font-size:.8rem;">Waiting for packets…</p></div>
+    <div id="feed"><p style="color:var(--muted);font-size:.8rem;">Live capture not available in deployed version.<br>Use manual analysis instead.</p></div>
   </div>
 
 </div>
@@ -508,6 +508,12 @@ function selVal(id, val) { document.getElementById(id).value = val; }
 let liveInterval = null;
 
 function startCapture() {
+  // Check if deployed (not localhost)
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    alert('⚠️ Live packet capture is not available in the deployed version.\n\nThis feature requires local network access and admin privileges, which are not supported on cloud platforms.\n\nUse the manual analysis feature instead.');
+    return;
+  }
+
   fetch('/start');
 
   if (!liveInterval) {
@@ -533,6 +539,17 @@ function stopCapture() {
   clearInterval(liveInterval);
   liveInterval = null;
 }
+</script>
+<script>
+  // Check if deployed and disable live capture buttons
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    document.querySelectorAll('button[onclick*="Capture"]').forEach(btn => {
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+      btn.style.cursor = 'not-allowed';
+      btn.title = 'Not available in deployed version';
+    });
+  }
 </script>
 </body>
 </html>
