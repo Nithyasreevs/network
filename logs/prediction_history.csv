@@ -7377,3 +7377,236 @@ timestamp,label,confidence,is_attack,model
 2026-04-17 23:08:07,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
 2026-04-17 23:08:07,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
 2026-04-17 23:08:07,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:57,Normal,76,False,Real-time
+2026-04-17 23:10:57,Normal,77,False,Real-time
+2026-04-17 23:10:58,Normal,74,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,77,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,77,False,Real-time
+2026-04-17 23:10:58,Normal, SYN Flood, UDP Flood, Application Layer Attack,80,True,Real-time
+2026-04-17 23:10:58,Normal,77,False,Real-time
+2026-04-17 23:10:58,Normal,77,False,Real-time
+2026-04-17 23:10:58,Normal,78,False,Real-time
+2026-04-17 23:10:58,Normal,69,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:58,Normal,72,False,Real-time
+2026-04-17 23:10:58,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,45,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,47,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,62,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,66,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,94,True,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,76,False,Real-time
+2026-04-17 23:10:59,Normal,77,False,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,83,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,83,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,90,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,92,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:10:59,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,98,True,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,94,True,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,82,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,92,True,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,79,False,Real-time
+2026-04-17 23:11:00,Normal,79,False,Real-time
+2026-04-17 23:11:00,Normal,79,False,Real-time
+2026-04-17 23:11:00,Normal,79,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:00,Normal,79,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,96,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,96,True,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,96,True,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,73,False,Real-time
+2026-04-17 23:11:00,Normal,78,False,Real-time
+2026-04-17 23:11:00,Normal,74,False,Real-time
+2026-04-17 23:11:00,Normal,76,False,Real-time
+2026-04-17 23:11:00,Normal,72,False,Real-time
+2026-04-17 23:11:00,Normal,77,False,Real-time
+2026-04-17 23:11:00,Normal,74,False,Real-time
+2026-04-17 23:11:00,Normal,69,False,Real-time
+2026-04-17 23:11:00,Normal,69,False,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,67,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:00,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal,69,False,Real-time
+2026-04-17 23:11:01,Normal,70,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,64,True,Real-time
+2026-04-17 23:11:01,Normal,45,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,44,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,44,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,66,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,93,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,91,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,96,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,41,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,42,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal,45,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,60,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,97,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,94,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,99,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,99,True,Real-time
+2026-04-17 23:11:01,Normal,76,False,Real-time
+2026-04-17 23:11:01,Normal,68,False,Real-time
+2026-04-17 23:11:01,Normal,77,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,94,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,95,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,98,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,99,True,Real-time
+2026-04-17 23:11:01,Normal,76,False,Real-time
+2026-04-17 23:11:01,Normal,77,False,Real-time
+2026-04-17 23:11:01,Normal,59,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal,72,False,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:01,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal,77,False,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:02,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal,76,False,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:03,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:04,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:04,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:05,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:05,Normal,77,False,Real-time
+2026-04-17 23:11:05,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:05,Normal,77,False,Real-time
+2026-04-17 23:11:05,Normal,76,False,Real-time
+2026-04-17 23:11:05,Normal,76,False,Real-time
+2026-04-17 23:11:06,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:06,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:07,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time
+2026-04-17 23:11:07,Normal, SYN Flood, UDP Flood, Application Layer Attack,100,True,Real-time

@@ -212,6 +212,7 @@ import collections
 
 live_data_queue = []
 is_capturing = False
+capture_error = None
 
 # Stateful tracking for flows
 flows = collections.defaultdict(lambda: {
@@ -306,12 +307,13 @@ def packet_callback(pkt):
         print(f"Packet error: {e}")
 
 def sniffer_thread():
-    global is_capturing
+    global is_capturing, capture_error
     try:
         sniff(prn=packet_callback, store=0, stop_filter=lambda x: not is_capturing)
     except Exception as e:
         print(f"Sniffer failed: {e}. (Are you running as Admin?)")
         is_capturing = False
+        capture_error = str(e)
 
 @app.route("/start")
 def start_capture():
